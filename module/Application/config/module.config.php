@@ -7,9 +7,12 @@
 
 namespace Application;
 
+use Application\Controller\IndexController;
+use Application\Service\CurrencyConverter;
+use Application\Service\Factory\CurrencyConverterFactory;
+use Application\Service\Factory\IndexControllerFactory;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -38,7 +41,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\IndexController::class => InvokableFactory::class,
+            IndexController::class => IndexControllerFactory::class,
         ],
     ],
     'view_manager' => [
@@ -57,4 +60,9 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            CurrencyConverter::class => CurrencyConverterFactory::class
+        ],
+    ]
 ];
